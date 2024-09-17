@@ -11,7 +11,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/Labs/*" element={<Labs />} />
-          <Route path="/Kanbas" element={<Kanbas />} />
+          <Route path="/Kanbas/*" element={<Kanbas />} />
         </Routes>
       </div>
     </HashRouter>
