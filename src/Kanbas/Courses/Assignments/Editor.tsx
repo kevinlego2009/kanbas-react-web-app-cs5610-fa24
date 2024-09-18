@@ -1,7 +1,7 @@
 export default function AssignmentEditor() {
     return (
         <div id="wd-assignments-editor">
-            <label htmlFor="wd-name">Assignment Name</label>
+            <label htmlFor="wd-name"><b>Assignment Name</b></label><br /><br />
             <input id="wd-name" value="A1 - ENV + HTML" /><br /><br />
             <textarea id="wd-description">
                 The assignment is available online Submit a link to the landing page of your Web application running on Netlify.
@@ -74,16 +74,42 @@ export default function AssignmentEditor() {
                         <label htmlFor="wd-file-upload">File Uploads</label>
                         <br />
                     </td>
-                </tr>
+                </tr><br />
                 <tr>
                     <td align="right" valign="top">
                         Assign
                     </td>
                     <td>
                         <label htmlFor="wd-assign-to">Assign to</label><br />
-                        <input type="text" id="wd-assign-to" value="Everyone" placeholder="member"/>
+                        <input type="text" id="wd-assign-to" value="Everyone" placeholder="member" />
+                    </td>
+                </tr><br />
+                <tr>
+                    <td></td>
+                    <td align="left" valign="top">
+                        <label htmlFor="wd-due-date">Due</label><br />
+                        <input type="date" id="wd-due-date" />
+                    </td>
+                </tr><br />
+                <tr>
+                    <td></td>
+                    <td align="left" valign="top">
+                        <label htmlFor="wd-available-from">Available from</label>
+                        <label htmlFor="wd-available-until">&nbsp;&nbsp;&nbsp;Until</label><br />
+                        <input type="date" id="wd-available-from" />
+                        <input type="date" id="wd-available-until" />
                     </td>
                 </tr>
+                <tr>
+                    <td colSpan={2}><hr /></td>
+                </tr>
+                <tr>
+                        <td></td>
+                        <td align="right" valign="top">
+                            <button>Cancel</button>
+                            <button>Save</button>
+                        </td>
+                    </tr>
             </table>
         </div>
     );
