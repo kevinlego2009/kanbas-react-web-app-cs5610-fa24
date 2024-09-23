@@ -1,4 +1,7 @@
+import Dimensions from "./Dimensions";
 import "./index.css";
+import Positions from "./Positions";
+import Zindex from "./Zindex";
 
 export default function Lab2() {
   return (
@@ -117,6 +120,9 @@ border-blue border-solid padding-fat"
         Rounded corners on the top
       </p>
 
+      <Dimensions />
+      <Positions />
+      <Zindex />
     </div>
   );
 }
