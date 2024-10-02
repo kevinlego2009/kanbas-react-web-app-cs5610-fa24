@@ -2,9 +2,16 @@ import { Link } from "react-router-dom";
 
 export default function AccountNavigation() {
   return (
-    <div id="wd-account-navigation">
-      <Link to={`/Kanbas/Account/Signin`}  > Signin  </Link> <br/>
-      <Link to={`/Kanbas/Account/Signup`}  > Signup  </Link> <br/>
-      <Link to={`/Kanbas/Account/Profile`} > Profile </Link> <br/>
+    <div className="wd list-group rounded-0 fs-5 d-none d-md-block" id="wd-account-navigation">
+      <Link className="list-group-item border-0 active" to={`/Kanbas/Account/Signin`}>
+        Signin
+      </Link>
+      <Link className="list-group-item border-0 text-danger" to={`/Kanbas/Account/Signup`}>
+        Signup
+      </Link>
+      <Link className="list-group-item border-0 text-danger" to={`/Kanbas/Account/Profile`}>
+        Profile
+      </Link>
     </div>
-);}
+  );
+}

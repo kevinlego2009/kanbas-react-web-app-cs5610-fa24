@@ -1,6 +1,11 @@
+import BootstrapGrids from "./BootstrapGrids";
 import Dimensions from "./Dimensions";
+import Flex from "./Flex";
+import Float from "./Float";
+import GridLayout from "./GridLayout";
 import "./index.css";
 import Positions from "./Positions";
+import ReactIconsSampler from "./Reacticons";
 import Zindex from "./Zindex";
 
 export default function Lab2() {
@@ -123,6 +128,11 @@ border-blue border-solid padding-fat"
       <Dimensions />
       <Positions />
       <Zindex />
+      <Float />
+      <GridLayout />
+      <Flex />
+      <ReactIconsSampler />
+      <BootstrapGrids />
     </div>
   );
 }

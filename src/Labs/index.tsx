@@ -7,7 +7,7 @@ import Lab3 from "./Lab3";
 
 export default function Labs(){
     return (
-        <div>
+        <div className="container-fluid">
             <h1>Da-En, Yu</h1>
             <TOC />
             <h1>Labs</h1>
