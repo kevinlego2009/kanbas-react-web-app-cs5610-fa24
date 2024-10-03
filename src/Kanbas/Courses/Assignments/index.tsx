@@ -4,6 +4,9 @@ import LessonControlButtons from "../Modules/LessonControlButtons";
 import { RxTriangleDown } from "react-icons/rx";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import { MdOutlineAssignment } from "react-icons/md";
+import GreenCheckmark from "../Modules/GreenCheckmark";
+import { IoEllipsisVertical } from "react-icons/io5";
+import { FaCheckCircle, FaCircle } from "react-icons/fa";
 
 export default function Assignments() {
     return (
@@ -14,13 +17,15 @@ export default function Assignments() {
             <div className="mt-4">
                 <ul id="wd-assignments" className="list-group rounded-0">
                     <li className="wd-assignment-lists list-group-item p-0 mb-5 fs-5 border-light shadow-sm">
-                        <div className="wd-title p-3 ps-2 bg-light d-flex align-items-center justify-content-between">
-                            <div className="d-flex align-items-center">
-                                <BsGripVertical className="me-2 fs-4 text-secondary" />
-                                <RxTriangleDown className="fs-3 position-relative" style={{ top: '-2px' }} />
+                        <div className="wd-title p-3 ps-2 bg-light d-flex align-items-center justify-content-between flex-wrap">
+                            <div className="d-flex align-items-center flex-nowrap">
+                                <div className="d-flex align-items-center me-2">
+                                    <BsGripVertical className="fs-4 text-secondary" />
+                                    <RxTriangleDown className="fs-3 ms-2" />
+                                </div>
                                 <b className="ms-2">ASSIGNMENTS</b>
                             </div>
-                            <div className="d-flex align-items-center">
+                            <div className="d-flex align-items-center mt-2 mt-sm-0">
                                 <span className="border border-1 rounded-pill px-3 py-1 me-2" id="wd-assignments-title">40% of Total</span>
                                 <AssignmentsControlButtons />
                             </div>
@@ -29,7 +34,7 @@ export default function Assignments() {
                         <ul className="wd-assignment-list list-group list-group-flush">
                             <li className="wd-assignment-list-item list-group-item p-4 border-bottom">
                                 <div className="d-flex align-items-center">
-                                    <div className="me-2">
+                                    <div className="d-flex align-items-center flex-nowrap me-3">
                                         <BsGripVertical className="fs-4 text-secondary" />
                                         <MdOutlineAssignment style={{ color: 'green' }} />
                                     </div>
@@ -41,13 +46,18 @@ export default function Assignments() {
                                             <span style={{ color: 'red' }}>Multiple Modules</span> | <b>Not available until</b> May 6 at 12:00am | <b>Due</b> May 13 at 11:59pm | 100 pts
                                         </div>
                                     </div>
-                                    <LessonControlButtons />
+                                    <div className="d-flex align-items-center flex-nowrap">
+                                        <FaCheckCircle style={{ top: "2px" }}
+                                            className="text-success" />
+                                        <FaCircle className="text-white fs-6" />
+                                        <IoEllipsisVertical className="fs-4" />
+                                    </div>
                                 </div>
                             </li>
 
                             <li className="wd-assignment-list-item list-group-item p-4 border-bottom">
                                 <div className="d-flex align-items-center">
-                                    <div className="me-2">
+                                    <div className="d-flex align-items-center flex-nowrap me-3">
                                         <BsGripVertical className="fs-4 text-secondary" />
                                         <MdOutlineAssignment style={{ color: 'green' }} />
                                     </div>
@@ -59,13 +69,18 @@ export default function Assignments() {
                                             <span style={{ color: 'red' }}>Multiple Modules</span> | <b>Not available until</b> May 13 at 12:00am | <b>Due</b> May 20 at 11:59pm | 100 pts
                                         </div>
                                     </div>
-                                    <LessonControlButtons />
+                                    <div className="d-flex align-items-center flex-nowrap">
+                                        <FaCheckCircle style={{ top: "2px" }}
+                                            className="text-success" />
+                                        <FaCircle className="text-white fs-6" />
+                                        <IoEllipsisVertical className="fs-4" />
+                                    </div>
                                 </div>
                             </li>
 
                             <li className="wd-assignment-list-item list-group-item p-4 border-bottom">
                                 <div className="d-flex align-items-center">
-                                    <div className="me-2">
+                                    <div className="d-flex align-items-center flex-nowrap me-3">
                                         <BsGripVertical className="fs-4 text-secondary" />
                                         <MdOutlineAssignment style={{ color: 'green' }} />
                                     </div>
@@ -77,14 +92,20 @@ export default function Assignments() {
                                             <span style={{ color: 'red' }}>Multiple Modules</span> | <b>Not available until</b> May 20 at 12:00am | <b>Due</b> May 27 at 11:59pm | 100 pts
                                         </div>
                                     </div>
-                                    <LessonControlButtons />
+                                    <div className="d-flex align-items-center flex-nowrap">
+                                        <FaCheckCircle style={{ top: "2px" }}
+                                            className="text-success" />
+                                        <FaCircle className="text-white fs-6" />
+                                        <IoEllipsisVertical className="fs-4" />
+                                    </div>
                                 </div>
                             </li>
+
 
                         </ul>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
