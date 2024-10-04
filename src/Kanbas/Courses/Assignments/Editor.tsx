@@ -51,34 +51,35 @@ export default function AssignmentEditor() {
                     <div className="col-md-2 d-flex justify-content-end">
                         <label htmlFor="wd-submission-type" className="form-label">Submission Type</label>
                     </div>
+                    <div className="col-md-10 mb-3">
+                        <div className="border p-3 rounded">
+                            <div className="mb-3">
+                                <select id="wd-submission-type" className="form-select">
+                                    <option value="ONLINE">Online</option>
+                                </select>
+                            </div>
 
-                    <div className="border p-3 rounded mb-3 col-md-10">
-                        <div className="mb-3">
-                            <select id="wd-submission-type" className="form-select">
-                                <option value="ONLINE">Online</option>
-                            </select>
-                        </div>
-
-                        <label className="form-label pb-3"><b>Online Entry Options</b></label>
-                        <div className="form-check mb-4">
-                            <input type="checkbox" className="form-check-input" id="wd-text-entry" />
-                            <label className="form-check-label" htmlFor="wd-text-entry">Text Entry</label>
-                        </div>
-                        <div className="form-check mb-4">
-                            <input type="checkbox" className="form-check-input" id="wd-website-url" />
-                            <label className="form-check-label" htmlFor="wd-website-url">Website URL</label>
-                        </div>
-                        <div className="form-check mb-4">
-                            <input type="checkbox" className="form-check-input" id="wd-media-recordings" />
-                            <label className="form-check-label" htmlFor="wd-media-recordings">Media Recordings</label>
-                        </div>
-                        <div className="form-check mb-4">
-                            <input type="checkbox" className="form-check-input" id="wd-student-annotation" />
-                            <label className="form-check-label" htmlFor="wd-student-annotation">Student Annotation</label>
-                        </div>
-                        <div className="form-check mb-4">
-                            <input type="checkbox" className="form-check-input" id="wd-file-upload" />
-                            <label className="form-check-label" htmlFor="wd-file-upload">File Uploads</label>
+                            <label className="form-label pb-3"><b>Online Entry Options</b></label>
+                            <div className="form-check mb-4">
+                                <input type="checkbox" className="form-check-input" id="wd-text-entry" />
+                                <label className="form-check-label" htmlFor="wd-text-entry">Text Entry</label>
+                            </div>
+                            <div className="form-check mb-4">
+                                <input type="checkbox" className="form-check-input" id="wd-website-url" />
+                                <label className="form-check-label" htmlFor="wd-website-url">Website URL</label>
+                            </div>
+                            <div className="form-check mb-4">
+                                <input type="checkbox" className="form-check-input" id="wd-media-recordings" />
+                                <label className="form-check-label" htmlFor="wd-media-recordings">Media Recordings</label>
+                            </div>
+                            <div className="form-check mb-4">
+                                <input type="checkbox" className="form-check-input" id="wd-student-annotation" />
+                                <label className="form-check-label" htmlFor="wd-student-annotation">Student Annotation</label>
+                            </div>
+                            <div className="form-check mb-4">
+                                <input type="checkbox" className="form-check-input" id="wd-file-upload" />
+                                <label className="form-check-label" htmlFor="wd-file-upload">File Uploads</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,27 +90,30 @@ export default function AssignmentEditor() {
                         <label htmlFor="wd-assign-to" className="form-label">Assign</label>
                     </div>
 
-                    <div className="border p-3 rounded col-md-10">
-                        <label className="form-label"><b>Assign to</b></label>
-                        <div className="mb-3">
-                            <input type="text" id="wd-assign-to" className="form-control" value="Everyone" placeholder="member" />
-                        </div>
+                    <div className="col-md-10 mb-3">
 
-                        <div className="row mb-3">
-                            <div className="col">
-                                <label htmlFor="wd-due-date" className="form-label"><b>Due</b></label>
-                                <input type="date" id="wd-due-date" className="form-control" />
+                        <div className="border p-3 rounded">
+                            <label className="form-label"><b>Assign to</b></label>
+                            <div className="mb-3">
+                                <input type="text" id="wd-assign-to" className="form-control" value="Everyone" placeholder="member" />
                             </div>
-                        </div>
 
-                        <div className="row mb-3">
-                            <div className="col-md-6">
-                                <label htmlFor="wd-available-from" className="form-label"><b>Available from</b></label>
-                                <input type="date" id="wd-available-from" className="form-control" />
+                            <div className="row mb-3">
+                                <div className="col">
+                                    <label htmlFor="wd-due-date" className="form-label"><b>Due</b></label>
+                                    <input type="date" id="wd-due-date" className="form-control" />
+                                </div>
                             </div>
-                            <div className="col-md-6">
-                                <label htmlFor="wd-available-until" className="form-label"><b>Until</b></label>
-                                <input type="date" id="wd-available-until" className="form-control" />
+
+                            <div className="row mb-3">
+                                <div className="col-md-6">
+                                    <label htmlFor="wd-available-from" className="form-label"><b>Available from</b></label>
+                                    <input type="date" id="wd-available-from" className="form-control" />
+                                </div>
+                                <div className="col-md-6">
+                                    <label htmlFor="wd-available-until" className="form-label"><b>Until</b></label>
+                                    <input type="date" id="wd-available-until" className="form-control" />
+                                </div>
                             </div>
                         </div>
                     </div>
