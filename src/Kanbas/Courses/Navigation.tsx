@@ -1,25 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function CoursesNavigation() {
+    const { cid } = useParams();
+
     return (
         <div className="wd list-group rounded-0 fs-5 d-none d-md-block" id="wd-courses-navigation">
-            <Link className="list-group-item border-0 active" id="wd-course-home-link" to="/Kanbas/Courses/1234/Home">
+            <Link className="list-group-item border-0 active" id="wd-course-home-link" to={`/Kanbas/Courses/${cid}/Home`}>
                 Home
             </Link>
-            <Link className="list-group-item border-0 text-danger" id="wd-course-modules-link" to="/Kanbas/Courses/1234/Modules">
+            <Link className="list-group-item border-0 text-danger" id="wd-course-modules-link" to={`/Kanbas/Courses/${cid}/Modules`}>
                 Modules
             </Link>
-            <Link className="list-group-item border-0 text-danger" id="wd-course-piazza-link" to="/Kanbas/Courses/1234/Piazza">
+            <Link className="list-group-item border-0 text-danger" id="wd-course-piazza-link" to={`/Kanbas/Courses/${cid}/Piazza`}>
                 Piazza</Link>
-            <Link className="list-group-item border-0 text-danger" id="wd-course-zoom-link" to="/Kanbas/Courses/1234/Zoom">
+            <Link className="list-group-item border-0 text-danger" id="wd-course-zoom-link" to={`/Kanbas/Courses/${cid}/Zoom`}>
                 Zoom</Link>
-            <Link className="list-group-item border-0 text-danger" id="wd-course-quizzes-link" to="/Kanbas/Courses/1234/Assignments">
+            <Link className="list-group-item border-0 text-danger" id="wd-course-quizzes-link" to={`/Kanbas/Courses/${cid}/Assignments`}>
                 Assignments</Link>
-            <Link className="list-group-item border-0 text-danger" id="wd-course-assignments-link" to="/Kanbas/Courses/1234/Quizzes">
+            <Link className="list-group-item border-0 text-danger" id="wd-course-assignments-link" to={`/Kanbas/Courses/${cid}/Quizzes`}>
                 Quizzes</Link>
-            <Link className="list-group-item border-0 text-danger" id="wd-course-grades-link" to="/Kanbas/Courses/1234/Grades">
+            <Link className="list-group-item border-0 text-danger" id="wd-course-grades-link" to={`/Kanbas/Courses/${cid}/Grades`}>
                 Grades</Link>
-            <Link className="list-group-item border-0 text-danger" id="wd-course-people-link" to="/Kanbas/Courses/1234/People">
+            <Link className="list-group-item border-0 text-danger" id="wd-course-people-link" to={`/Kanbas/Courses/${cid}/People`}>
                 People</Link>
         </div>
     );

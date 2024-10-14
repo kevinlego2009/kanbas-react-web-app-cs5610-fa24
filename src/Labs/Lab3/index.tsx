@@ -1,7 +1,9 @@
+import Add from "./Add";
 import AddingAndRemovingToFromArrays from "./AddingAndRemovingToFromArrays";
 import ArrayIndexAndLength from "./ArrayIndexAndLength";
 import ArrowFunctions from "./ArrowFunctions";
 import BooleanVariables from "./BooleanVariables";
+import Classes from "./Classes";
 import ConditionalOutputIfElse from "./ConditionalOutputIfElse";
 import ConditionalOutputInline from "./ConditionalOutputInline";
 import Destructing from "./Destructing";
@@ -14,11 +16,15 @@ import LegacyFunctions from "./LegacyFunctions";
 import MapFunction from "./MapFunction";
 import SimpleArrays from "./SimpleArrays";
 import Spreading from "./Spreading";
+import Square from "./Square";
+import Styles from "./Styles";
 import TemplateLiterals from "./TemplateLiterals";
 import TernaryOperator from "./TernaryOperator";
 import TodoList from "./todos/TodoList";
 import VariablesAndConstants from "./VariablesAndConstants";
 import VariableTypes from "./VariableTypes";
+import Highlight from "./Highlight";
+import PathParameters from "./PathParameters";
 
 export default function Lab3() {
     return (
@@ -45,6 +51,20 @@ export default function Lab3() {
             <Destructing />
             <FunctionDestructing />
             <DestructingImports />
-        </div>
+            <Classes />
+            <Styles />
+
+            <Add a={3} b={4} />
+
+            <h4>Square of 4</h4>
+            <Square>4</Square>
+            <hr />
+
+            <Highlight>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio voluptate ipsa vero non fuga odio tempore provident sapiente dolorum doloremque, architecto unde repellendus magnam autem nihil inventore praesentium dolores sunt.
+            </Highlight>
+
+            <PathParameters />
+        </div >
     );
 }
