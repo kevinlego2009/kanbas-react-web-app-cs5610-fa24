@@ -1,14 +1,17 @@
 import { BsGripVertical } from "react-icons/bs";
 import AssignmentControls from "./AssignmentControls";
-import LessonControlButtons from "../Modules/LessonControlButtons";
 import { RxTriangleDown } from "react-icons/rx";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import { MdOutlineAssignment } from "react-icons/md";
-import GreenCheckmark from "../Modules/GreenCheckmark";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { FaCheckCircle, FaCircle } from "react-icons/fa";
+import { assignments } from "../../Database";
+import { useParams } from "react-router";
 
 export default function Assignments() {
+    const { cid } = useParams();
+    const assignment = assignments.filter((assignment) => assignment.course === cid);
+
     return (
         <div id="wd-assignments" className="container-fluid">
             <div>
@@ -32,15 +35,16 @@ export default function Assignments() {
                         </div>
 
                         <ul className="wd-assignment-list list-group list-group-flush">
-                            <li className="wd-assignment-list-item list-group-item p-4 border-bottom">
+
+                            {assignment.map((assign: any) => (<li className="wd-assignment-list-item list-group-item p-4 border-bottom">
                                 <div className="d-flex align-items-center">
                                     <div className="d-flex align-items-center flex-nowrap me-3">
                                         <BsGripVertical className="fs-4 text-secondary" />
                                         <MdOutlineAssignment style={{ color: 'green' }} />
                                     </div>
                                     <div className="flex-grow-1">
-                                        <a className="wd-assignment-link text-dark" href="#/Kanbas/Courses/1234/Assignments/123">
-                                            <b>A1</b>
+                                        <a className="wd-assignment-link text-dark" href={`#/Kanbas/Courses/${cid}/Assignments/${assign._id}`}>
+                                            <b>{assign.title}</b>
                                         </a>
                                         <div className="text-muted mt-1">
                                             <span style={{ color: 'red' }}>Multiple Modules</span> | <b>Not available until</b> May 6 at 12:00am | <b>Due</b> May 13 at 11:59pm | 100 pts
@@ -53,9 +57,9 @@ export default function Assignments() {
                                         <IoEllipsisVertical className="fs-4" />
                                     </div>
                                 </div>
-                            </li>
+                            </li>))}
 
-                            <li className="wd-assignment-list-item list-group-item p-4 border-bottom">
+                            {/* <li className="wd-assignment-list-item list-group-item p-4 border-bottom">
                                 <div className="d-flex align-items-center">
                                     <div className="d-flex align-items-center flex-nowrap me-3">
                                         <BsGripVertical className="fs-4 text-secondary" />
@@ -99,7 +103,7 @@ export default function Assignments() {
                                         <IoEllipsisVertical className="fs-4" />
                                     </div>
                                 </div>
-                            </li>
+                            </li> */}
 
 
                         </ul>

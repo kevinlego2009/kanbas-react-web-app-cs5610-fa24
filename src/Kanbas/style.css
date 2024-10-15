@@ -25,12 +25,31 @@ body * {
 
 /* Prevent cards from stretching or shrinking */
 .wd-dashboard-course {
-    flex: 0 0 auto; /* Prevent the width from changing */
-    margin: 35px 0; /* Adds 35px spacing above and below the cards */
+    flex: 0 0 auto;
+    /* Prevent the width from changing */
+    margin: 35px 0;
+    /* Adds 35px spacing above and below the cards */
 }
 
 .custom-card {
-    width: 270px; /* Set a fixed width between 250 and 270 pixels */
+    width: 270px;
+    /* Set a fixed width between 250 and 270 pixels */
+}
+
+.wd-dashboard-course-title {
+    height: 25px; /* Set the desired height for all descriptions */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+}
+
+.wd-dashboard-course-description {
+    height: 70px; /* Set the desired height for all descriptions */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    white-space: normal;
 }
 
 .list-group.wd>.list-group-item.active {
@@ -58,7 +77,7 @@ body * {
     border-left: 3px solid green !important;
 }
 
-#wd-modules-controls{
+#wd-modules-controls {
     padding-right: 20px;
 }
 
@@ -77,12 +96,14 @@ body * {
 }
 
 .wd-assignment-link {
-    color: black; /* Set the text color to black */
+    color: black;
+    /* Set the text color to black */
     text-decoration: none;
 }
 
 .wd-assignment-link:hover {
-    color: black; /* Ensure the link stays black on hover */
+    color: black;
+    /* Ensure the link stays black on hover */
     text-decoration: underline;
 }
 
