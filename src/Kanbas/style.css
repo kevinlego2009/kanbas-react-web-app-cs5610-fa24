@@ -37,7 +37,8 @@ body * {
 }
 
 .wd-dashboard-course-title {
-    height: 25px; /* Set the desired height for all descriptions */
+    height: 25px;
+    /* Set the desired height for all descriptions */
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -45,7 +46,8 @@ body * {
 }
 
 .wd-dashboard-course-description {
-    height: 70px; /* Set the desired height for all descriptions */
+    height: 70px;
+    /* Set the desired height for all descriptions */
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
