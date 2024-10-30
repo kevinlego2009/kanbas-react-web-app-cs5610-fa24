@@ -1,118 +1,117 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body * {
-    font-family:
-        Arial, Helvetica,
-        sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 @media (min-width: 768px) {
-    #wd-kanbas .wd-main-content-offset {
-        padding-left: 140px !important;
-    }
+  #wd-kanbas .wd-main-content-offset {
+    padding-left: 140px !important;
+  }
 }
 
-#wd-dashboard-published {
-    padding-left: 20px;
+#wd-dashboard-published,
+#wd-dashboard-enrolled {
+  padding-left: 20px;
 }
 
 #wd-dashboard-courses {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 /* Prevent cards from stretching or shrinking */
 .wd-dashboard-course {
-    flex: 0 0 auto;
-    /* Prevent the width from changing */
-    margin: 35px 0;
-    /* Adds 35px spacing above and below the cards */
+  flex: 0 0 auto;
+  /* Prevent the width from changing */
+  margin: 35px 0;
+  /* Adds 35px spacing above and below the cards */
 }
 
 .custom-card {
-    width: 270px;
-    /* Set a fixed width between 250 and 270 pixels */
+  width: 270px;
+  /* Set a fixed width between 250 and 270 pixels */
 }
 
 .wd-dashboard-course-title {
-    height: 25px;
-    /* Set the desired height for all descriptions */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    white-space: normal;
+  height: 25px;
+  /* Set the desired height for all descriptions */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
 }
 
 .wd-dashboard-course-description {
-    height: 70px;
-    /* Set the desired height for all descriptions */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    white-space: normal;
+  height: 70px;
+  /* Set the desired height for all descriptions */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
 }
 
-.list-group.wd>.list-group-item.active {
-    color: black;
-    background-color: white;
-    border-left: 3px solid black !important;
+.list-group.wd > .list-group-item.active {
+  color: black;
+  background-color: white;
+  border-left: 3px solid black !important;
 }
 
 .btn-secondary {
-    --bs-btn-color: #000 !important;
-    --bs-btn-bg: #c7cdd1 !important;
-    --bs-btn-border-color: #c7cdd1 !important;
-    --bs-btn-hover-color: #fff !important;
+  --bs-btn-color: #000 !important;
+  --bs-btn-bg: #c7cdd1 !important;
+  --bs-btn-border-color: #c7cdd1 !important;
+  --bs-btn-hover-color: #fff !important;
 }
 
 .bg-secondary {
-    --bs-secondary-rgb: 199, 205, 209;
+  --bs-secondary-rgb: 199, 205, 209;
 }
 
 .list-group-item {
-    --bs-list-group-border-color: gray;
+  --bs-list-group-border-color: gray;
 }
 
 .wd-lesson {
-    border-left: 3px solid green !important;
+  border-left: 3px solid green !important;
 }
 
 #wd-modules-controls {
-    padding-right: 20px;
+  padding-right: 20px;
 }
 
 #wd-modules {
-    padding-right: 20px;
+  padding-right: 20px;
 }
 
 #wd-assignments {
-    padding-left: 20px;
-    padding-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #wd-assignment-controls {
-    padding-left: 20px;
-    padding-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .wd-assignment-link {
-    color: black;
-    /* Set the text color to black */
-    text-decoration: none;
+  color: black;
+  /* Set the text color to black */
+  text-decoration: none;
 }
 
 .wd-assignment-link:hover {
-    color: black;
-    /* Ensure the link stays black on hover */
-    text-decoration: underline;
+  color: black;
+  /* Ensure the link stays black on hover */
+  text-decoration: underline;
 }
 
 .wd-assignment-list {
-    border-left: 6px solid rgb(34, 151, 34);
+  border-left: 6px solid rgb(34, 151, 34);
 }
 
 .flex-grow-1 {
-    padding-left: 6px;
+  padding-left: 6px;
 }

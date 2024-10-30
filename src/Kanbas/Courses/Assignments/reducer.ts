@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { assignments } from "../../Database";
-import { divide } from "../../../Labs/Lab3/Math";
 
 const initialState = {
   assignments: assignments,
