@@ -12,11 +12,12 @@ export default function Modules() {
     const { cid } = useParams();
     const [moduleName, setModuleName] = useState("");
     const { modules } = useSelector((state: any) => state.modulesReducer);
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
     const dispatch = useDispatch();
 
     return (
         <div>
-            <ModulesControls moduleName={moduleName} setModuleName={setModuleName}
+            <ModulesControls currentUser={currentUser} moduleName={moduleName} setModuleName={setModuleName}
                 addModule={() => {
                     dispatch(addModule({ name: moduleName, course: cid }));
                     setModuleName("");
@@ -39,7 +40,7 @@ export default function Modules() {
                                     }}
                                     defaultValue={module.name} />
                             )}
-                            <ModuleControlButtons moduleId={module._id} deleteModule={(moduleId) => {
+                            <ModuleControlButtons currentUser={currentUser} moduleId={module._id} deleteModule={(moduleId) => {
                                 dispatch(deleteModule(moduleId));
                             }}
                                 editModule={(moduleId) => dispatch(editModule(moduleId))} />

@@ -2,7 +2,11 @@ import { FaPlus } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { Navigate, useNavigate, useParams } from "react-router";
 
-export default function AssignmentControls() {
+export default function AssignmentControls({
+  currentUser,
+}: {
+  currentUser: { role: string };
+}) {
   const navigate = useNavigate();
 
   return (
@@ -21,31 +25,34 @@ export default function AssignmentControls() {
           placeholder="Search for Assignments"
         />
       </div>
+      {currentUser.role === "FACULTY" ? (
+        <div>
+          <button
+            id="wd-add-assignment-group"
+            className="btn btn-lg btn-secondary me-1"
+          >
+            <FaPlus
+              className="position-relative me-2"
+              style={{ bottom: "1px" }}
+            />
+            Group
+          </button>
 
-      <div>
-        <button
-          id="wd-add-assignment-group"
-          className="btn btn-lg btn-secondary me-1"
-        >
-          <FaPlus
-            className="position-relative me-2"
-            style={{ bottom: "1px" }}
-          />
-          Group
-        </button>
-
-        <button
-          onClick={() => navigate(`./createAssignment`)}
-          id="wd-add-assignment"
-          className="btn btn-lg btn-danger"
-        >
-          <FaPlus
-            className="position-relative me-2"
-            style={{ bottom: "1px" }}
-          />
-          Assignment
-        </button>
-      </div>
+          <button
+            onClick={() => navigate(`./createAssignment`)}
+            id="wd-add-assignment"
+            className="btn btn-lg btn-danger"
+          >
+            <FaPlus
+              className="position-relative me-2"
+              style={{ bottom: "1px" }}
+            />
+            Assignment
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

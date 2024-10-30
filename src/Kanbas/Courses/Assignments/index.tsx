@@ -13,8 +13,8 @@ import { useState } from "react";
 
 export default function Assignments() {
   const { cid } = useParams();
-  // const assignment = assignments.filter((assignment) => assignment.course === cid);
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
   const [assignmentToDelete, setAssignmentToDelete] = useState<string | null>(
     null
@@ -38,7 +38,7 @@ export default function Assignments() {
   return (
     <div id="wd-assignments" className="container-fluid">
       <div>
-        <AssignmentControls />
+        <AssignmentControls currentUser={currentUser} />
       </div>
       <div className="mt-4">
         <ul id="wd-assignments" className="list-group rounded-0">
@@ -92,10 +92,14 @@ export default function Assignments() {
                         </div>
                       </div>
                       <div className="d-flex align-items-center flex-nowrap">
-                        <FaTrash
-                          onClick={() => handleDeleteClick(assign._id)}
-                          className="text-danger fs-5 me-2"
-                        />
+                        {currentUser.role === "FACULTY" ? (
+                          <FaTrash
+                            onClick={() => handleDeleteClick(assign._id)}
+                            className="text-danger fs-5 me-2"
+                          />
+                        ) : (
+                          ""
+                        )}
                         {assignmentToDelete === assign._id && (
                           <div className="confirm-dialog-overlay">
                             <div className="confirm-dialog">

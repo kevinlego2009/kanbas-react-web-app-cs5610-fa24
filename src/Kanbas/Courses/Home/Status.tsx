@@ -6,35 +6,81 @@ import { IoMdHome } from "react-icons/io";
 import { MdOutlineBarChart } from "react-icons/md";
 import { TfiAnnouncement } from "react-icons/tfi";
 import { IoIosNotifications } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 export default function CourseStatus() {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   return (
-    <div className="d-none d-lg-block" id="wd-course-status" style={{ width: "300px" }}>
-      <h2>Course Status</h2>
-      <div className="d-flex">
-        <div className="w-50 pe-1">
-          <button className="btn btn-lg btn-secondary w-100 text-nowrap ">
-            <MdDoNotDisturbAlt className="me-2 fs-5" /> Unpublish </button>
+    <>
+      {currentUser.role === "FACULTY" ? (
+        <div
+          className="d-none d-lg-block"
+          id="wd-course-status"
+          style={{ width: "300px" }}
+        >
+          <h2>Course Status</h2>
+          <div className="d-flex">
+            <div className="w-50 pe-1">
+              <button className="btn btn-lg btn-secondary w-100 text-nowrap ">
+                <MdDoNotDisturbAlt className="me-2 fs-5" /> Unpublish{" "}
+              </button>
+            </div>
+            <div className="w-50">
+              <button className="btn btn-lg btn-success w-100">
+                <FaCheckCircle className="me-2 fs-5" /> Publish{" "}
+              </button>
+            </div>
+          </div>
+          <br />
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <BiImport className="me-2 fs-5" /> Import Existing Content{" "}
+          </button>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <LiaFileImportSolid className="me-2 fs-5" /> Import from Commons{" "}
+          </button>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <IoMdHome className="me-2 fs-5" />
+            Choose Home Page{" "}
+          </button>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <MdOutlineBarChart className="me-2 fs-5" /> View Course Stream{" "}
+          </button>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <TfiAnnouncement className="me-2 fs-5" />
+            New Announcement{" "}
+          </button>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <MdOutlineBarChart className="me-2 fs-5" /> New Analytics{" "}
+          </button>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <IoIosNotifications className="me-2 fs-5" />
+            View Course Notifications{" "}
+          </button>
         </div>
-        <div className="w-50">
-          <button className="btn btn-lg btn-success w-100">
-            <FaCheckCircle className="me-2 fs-5" /> Publish </button>
+      ) : (
+        <div
+          className="d-none d-lg-block"
+          id="wd-course-status"
+          style={{ width: "300px" }}
+        >
+          <h2>Course Status</h2>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <MdOutlineBarChart className="me-2 fs-5" /> View Course Stream{" "}
+          </button>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <TfiAnnouncement className="me-2 fs-5" />
+            New Announcement{" "}
+          </button>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <MdOutlineBarChart className="me-2 fs-5" /> New Analytics{" "}
+          </button>
+          <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
+            <IoIosNotifications className="me-2 fs-5" />
+            View Course Notifications{" "}
+          </button>
         </div>
-      </div><br />
-      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
-        <BiImport className="me-2 fs-5" /> Import Existing Content </button>
-      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
-        <LiaFileImportSolid className="me-2 fs-5" /> Import from Commons </button>
-      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
-        <IoMdHome className="me-2 fs-5" />Choose Home Page </button>
-      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
-        <MdOutlineBarChart className="me-2 fs-5" /> View Course Stream </button>
-      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
-        <TfiAnnouncement className="me-2 fs-5" />New Announcement </button>
-      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
-        <MdOutlineBarChart className="me-2 fs-5" /> New Analytics </button>
-      <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
-        <IoIosNotifications className="me-2 fs-5" />View Course Notifications </button>
-    </div>
+      )}
+    </>
   );
 }

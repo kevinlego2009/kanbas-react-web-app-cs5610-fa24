@@ -109,8 +109,73 @@ export default function Dashboard({
       )}{" "}
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
-          {!showAll
-            ? // enrolled
+          {currentUser.role === "FACULTY"
+            ? // Show all courses with Delete and Edit options for faculty
+              courses.map((course) => (
+                <div
+                  className="wd-dashboard-course col"
+                  style={{ width: "300px" }}
+                  key={course._id}
+                >
+                  <div className="card rounded-3 overflow-hidden">
+                    <div>
+                      <Link
+                        to={`/Kanbas/Courses/${course._id}/Home`}
+                        className="wd-dashboard-course-link text-decoration-none text-dark"
+                      >
+                        <img
+                          src={`${course.image}`}
+                          width="100%"
+                          height={160}
+                        />
+                        <div className="card-body">
+                          <h5 className="wd-dashboard-course-title card-title text-primary">
+                            {course.name}
+                          </h5>
+                          <p
+                            className="wd-dashboard-course-description card-text overflow-y-hidden"
+                            style={{ maxHeight: 100 }}
+                          >
+                            {course.description}
+                          </p>
+                        </div>
+                        <button className="btn btn-primary ms-2"> Go </button>
+                      </Link>
+
+                      {/* Delete and Edit buttons for faculty */}
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault();
+                          deleteCourse(course._id);
+                          dispatch(
+                            deleteEnrollment({
+                              user: currentUser._id,
+                              course: course._id,
+                            })
+                          );
+                        }}
+                        className="btn btn-danger float-end me-2 mb-2"
+                        id="wd-delete-course-click"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        id="wd-edit-course-click"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setCourse(course);
+                        }}
+                        className="btn btn-warning float-end me-2 mb-2"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))
+            : // Non-faculty users: Respect the `showAll` state
+            !showAll
+            ? // Enrolled courses only when showAll is false
               courses
                 .filter((course) =>
                   enrollments.some(
@@ -123,6 +188,7 @@ export default function Dashboard({
                   <div
                     className="wd-dashboard-course col"
                     style={{ width: "300px" }}
+                    key={course._id}
                   >
                     <div className="card rounded-3 overflow-hidden">
                       <Link
@@ -136,53 +202,21 @@ export default function Dashboard({
                         />
                         <div className="card-body">
                           <h5 className="wd-dashboard-course-title card-title text-primary">
-                            {course.name}{" "}
+                            {course.name}
                           </h5>
                           <p
                             className="wd-dashboard-course-description card-text overflow-y-hidden"
                             style={{ maxHeight: 100 }}
                           >
-                            {course.description}{" "}
+                            {course.description}
                           </p>
                           <button className="btn btn-primary"> Go </button>
-                          {currentUser.role === "FACULTY" ? (
-                            <>
-                              <button
-                                onClick={(event) => {
-                                  event.preventDefault();
-                                  deleteCourse(course._id);
-                                  dispatch(
-                                    deleteEnrollment({
-                                      user: currentUser._id,
-                                      course: course._id,
-                                    })
-                                  );
-                                }}
-                                className="btn btn-danger float-end"
-                                id="wd-delete-course-click"
-                              >
-                                Delete
-                              </button>
-                              <button
-                                id="wd-edit-course-click"
-                                onClick={(event) => {
-                                  event.preventDefault();
-                                  setCourse(course);
-                                }}
-                                className="btn btn-warning me-2 float-end"
-                              >
-                                Edit
-                              </button>
-                            </>
-                          ) : (
-                            ""
-                          )}
                         </div>
                       </Link>
                     </div>
                   </div>
                 ))
-            : // all courses
+            : // Show all courses when showAll is true
               courses.map((course) => (
                 <div
                   className="wd-dashboard-course col"
