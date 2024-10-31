@@ -309,7 +309,10 @@ export default function AssignmentEditor() {
 
         <div className="d-flex justify-content-end">
           <button
-            onClick={() => navigate(-1)}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(-1);
+            }}
             className="btn btn-secondary me-2"
           >
             Cancel
