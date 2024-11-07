@@ -30,7 +30,7 @@ export default function QueryParameters() {
       </a>
       <a
         id="wd-query-parameter-subtract" className="btn btn-danger me-2"
-        href={`${REMOTE_SERVER}/lab5/calculator?operation=subtract&a=${a}&b=${b}`}
+        href={`${REMOTE_SERVER}/lab5/calculator?operation=substract&a=${a}&b=${b}`}
       >
         Substract {a} - {b}
       </a>
