@@ -2,6 +2,8 @@ import { useNavigate, useParams } from "react-router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addAssignment, updateAssignment } from "./reducer";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
 
 export default function AssignmentEditor() {
   const aID = useParams().aid;
@@ -27,8 +29,10 @@ export default function AssignmentEditor() {
         }
   );
 
-  const saveAssignment = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const saveAssignment = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+
+    if (!cid) return;
 
     if (Object.values(assignment).some((attribute: any) => attribute === "")) {
       alert("All fields must be filled out.");
@@ -36,9 +40,14 @@ export default function AssignmentEditor() {
     }
 
     if (flag) {
+      await assignmentsClient.updateAssignment(assignment);
       dispatch(updateAssignment(assignment));
     } else {
-      dispatch(addAssignment(assignment));
+      const newAssignment = await coursesClient.createAssignmentForCourse(
+        cid,
+        assignment
+      );
+      dispatch(addAssignment(newAssignment));
     }
     navigate(-1);
   };
