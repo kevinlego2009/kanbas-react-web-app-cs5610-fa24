@@ -75,6 +75,7 @@ export default function Kanbas() {
                     courses={courses}
                     course={course}
                     setCourse={setCourse}
+                    setCourses={setCourses}
                     addNewCourse={addNewCourse}
                     deleteCourse={deleteCourse}
                     updateCourse={updateCourse}

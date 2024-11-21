@@ -7,14 +7,32 @@ export default function AccountNavigation() {
   const { pathname } = useLocation();
 
   return (
-    <div className="wd list-group rounded-0 fs-5 d-none d-md-block" id="wd-account-navigation">
-      <Link className="list-group-item border-0 active" to={`/Kanbas/Account/Signin`}>
+    <div
+      className="wd list-group rounded-0 fs-5 d-none d-md-block"
+      id="wd-account-navigation"
+    >
+      <Link
+        className={`list-group-item border-0 text-danger ${
+          pathname.includes("Signin") ? "active text-black" : ""
+        }`}
+        to={currentUser ? `/Kanbas/Account/Profile` : `/Kanbas/Account/Signin`}
+      >
         Signin
       </Link>
-      <Link className="list-group-item border-0 text-danger" to={`/Kanbas/Account/Signup`}>
+      <Link
+        className={`list-group-item border-0 text-danger ${
+          pathname.includes("Signup") ? "active text-black" : ""
+        }`}
+        to={currentUser ? `/Kanbas/Account/Profile` : `/Kanbas/Account/Signup`}
+      >
         Signup
       </Link>
-      <Link className="list-group-item border-0 text-danger" to={`/Kanbas/Account/Profile`}>
+      <Link
+        className={`list-group-item border-0 text-danger ${
+          pathname.includes("Profile") ? "active text-black" : ""
+        }`}
+        to={`/Kanbas/Account/Profile`}
+      >
         Profile
       </Link>
     </div>

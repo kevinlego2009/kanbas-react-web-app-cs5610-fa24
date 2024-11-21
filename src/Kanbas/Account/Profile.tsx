@@ -80,14 +80,15 @@ export default function Profile() {
               }
             />
             <select
+              defaultValue={currentUser?.role || "USER"}
               onChange={(e) => setProfile({ ...profile, role: e.target.value })}
               className="form-control mb-2"
               id="wd-role"
             >
-              <option value="USER">User</option>{" "}
-              <option value="ADMIN">Admin</option>
-              <option value="FACULTY">Faculty</option>{" "}
-              <option value="STUDENT">Student</option>
+              <option value="USER">USER</option>
+              <option value="ADMIN">ADMIN</option>
+              <option value="FACULTY">FACULTY</option>
+              <option value="STUDENT">STUDENT</option>
             </select>
             <button
               onClick={updateProfile}

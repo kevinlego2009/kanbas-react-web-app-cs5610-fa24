@@ -3,12 +3,18 @@ import { Link } from "react-router-dom";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addEnrollment, deleteEnrollment } from "./reducer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import * as coursesClient from "./Courses/client";
+import * as userClient from "./Account/client";
+import axios from "axios";
+const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
+const ENROLLMENTS_API = `${REMOTE_SERVER}/api/enrollments`;
 
 export default function Dashboard({
   courses,
   course,
   setCourse,
+  setCourses,
   addNewCourse,
   deleteCourse,
   updateCourse,
@@ -16,19 +22,58 @@ export default function Dashboard({
   courses: any[];
   course: any;
   setCourse: (course: any) => void;
+  setCourses: (course: any) => void;
   addNewCourse: (courseID: any) => void;
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
+
+  type Course = {
+    _id: string;
+    name: string;
+    description: string;
+    image: string;
+  };
+  const [allCourses, setAllCourses] = useState<Course[]>([]);
+  type Enrollment = {
+    _id: string;
+    user: string;
+    course: string;
+  };
+  const [allEnrollments, setAllEnrollments] = useState<Enrollment[]>([]);
+
   const dispatch = useDispatch();
   const [showAll, setShowAll] = useState(false);
   const isEnrolled = (courseID: string) => {
-    return enrollments.some(
+    return allEnrollments.some(
       (enrollment: any) =>
         enrollment.user === currentUser._id && enrollment.course === courseID
     );
+  };
+  useEffect(() => {
+    const fetchAllCourses = async () => {
+      const courses = await coursesClient.fetchAllCourses();
+      setAllCourses(courses);
+    };
+    const fetchAllEnrollments = async () => {
+      const { data } = await axios.get(`${ENROLLMENTS_API}`);
+      const enrollments = data;
+      setAllEnrollments(enrollments);
+    };
+
+    fetchAllCourses();
+    fetchAllEnrollments();
+  }, [allCourses, allEnrollments]);
+
+  const enrollCourse = async (courseId: any) => {
+    await userClient.enrollCourse(courseId);
+    console.log(`Enrolled in ${courseId}`);
+  };
+
+  const unenrollCourse = async (courseId: any) => {
+    await userClient.unenrollCourse(courseId);
   };
 
   return (
@@ -91,19 +136,19 @@ export default function Dashboard({
       )}
       {showAll ? (
         <h2 id="wd-dashboard-published">
-          Published Courses ({courses.length})
+          Published Courses ({allCourses.length})
           <hr />
         </h2>
       ) : currentUser.role === "FACULTY" ? (
         <>
           <h2 id="wd-dashboard-published">
-            Published Courses ({courses.length})
+            Published Courses ({allCourses.length})
             <hr />
           </h2>
         </>
       ) : (
         <h2 id="wd-dashboard-enrolled">
-          Enrolled Courses
+          Enrolled Courses ({courses.length})
           <hr />
         </h2>
       )}{" "}
@@ -111,7 +156,7 @@ export default function Dashboard({
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {currentUser.role === "FACULTY"
             ? // Show all courses with Delete and Edit options for faculty
-              courses.map((course) => (
+              allCourses.map((course) => (
                 <div
                   className="wd-dashboard-course col"
                   style={{ width: "300px" }}
@@ -176,48 +221,36 @@ export default function Dashboard({
             : // Non-faculty users: Respect the `showAll` state
             !showAll
             ? // Enrolled courses only when showAll is false
-              courses
-                .filter((course) =>
-                  enrollments.some(
-                    (enrollment: any) =>
-                      enrollment.user === currentUser._id &&
-                      enrollment.course === course._id
-                  )
-                )
-                .map((course) => (
-                  <div
-                    className="wd-dashboard-course col"
-                    style={{ width: "300px" }}
-                    key={course._id}
-                  >
-                    <div className="card rounded-3 overflow-hidden">
-                      <Link
-                        to={`/Kanbas/Courses/${course._id}/Home`}
-                        className="wd-dashboard-course-link text-decoration-none text-dark"
-                      >
-                        <img
-                          src={`${course.image}`}
-                          width="100%"
-                          height={160}
-                        />
-                        <div className="card-body">
-                          <h5 className="wd-dashboard-course-title card-title text-primary">
-                            {course.name}
-                          </h5>
-                          <p
-                            className="wd-dashboard-course-description card-text overflow-y-hidden"
-                            style={{ maxHeight: 100 }}
-                          >
-                            {course.description}
-                          </p>
-                          <button className="btn btn-primary"> Go </button>
-                        </div>
-                      </Link>
-                    </div>
-                  </div>
-                ))
-            : // Show all courses when showAll is true
               courses.map((course) => (
+                <div
+                  className="wd-dashboard-course col"
+                  style={{ width: "300px" }}
+                  key={course._id}
+                >
+                  <div className="card rounded-3 overflow-hidden">
+                    <Link
+                      to={`/Kanbas/Courses/${course._id}/Home`}
+                      className="wd-dashboard-course-link text-decoration-none text-dark"
+                    >
+                      <img src={`${course.image}`} width="100%" height={160} />
+                      <div className="card-body">
+                        <h5 className="wd-dashboard-course-title card-title text-primary">
+                          {course.name}
+                        </h5>
+                        <p
+                          className="wd-dashboard-course-description card-text overflow-y-hidden"
+                          style={{ maxHeight: 100 }}
+                        >
+                          {course.description}
+                        </p>
+                        <button className="btn btn-primary"> Go </button>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              ))
+            : // Show all courses when showAll is true
+              allCourses.map((course) => (
                 <div
                   className="wd-dashboard-course col"
                   style={{ width: "300px" }}
@@ -275,14 +308,24 @@ export default function Dashboard({
                         <button
                           className="btn btn-danger float-end me-2 mb-2"
                           id="wd-unenroll-course-click"
-                          onClick={() =>
+                          onClick={() => {
+                            if (!course || !course._id) {
+                              console.error(
+                                "Course is undefined or does not have an _id"
+                              );
+                              return;
+                            }
+                            unenrollCourse(course._id);
                             dispatch(
                               deleteEnrollment({
                                 user: currentUser._id,
                                 course: course._id,
                               })
-                            )
-                          }
+                            );
+                            setCourses(
+                              courses.filter((c) => c._id !== course._id)
+                            );
+                          }}
                         >
                           Unenroll
                         </button>
@@ -290,14 +333,24 @@ export default function Dashboard({
                         <button
                           className="btn btn-success float-end me-2 mb-2"
                           id="wd-enroll-course-click"
-                          onClick={() =>
+                          onClick={() => {
+                            if (!course || !course._id) {
+                              console.error(
+                                "Course is undefined or does not have an _id"
+                              );
+                              return;
+                            }
+                            enrollCourse(course._id);
                             dispatch(
                               addEnrollment({
                                 user: currentUser._id,
                                 course: course._id,
                               })
-                            )
-                          }
+                            );
+                            if (!courses.find((c) => c._id === course._id)) {
+                              setCourses([...courses, course]);
+                            }
+                          }}
                         >
                           Enroll
                         </button>
