@@ -154,7 +154,7 @@ export default function Dashboard({
           Published Courses
           <hr />
         </h2>
-      ) : currentUser.role === "FACULTY" ? (
+      ) : currentUser.role === "FACULTY"? (
         <>
           <h2 id="wd-dashboard-published">
             Published Courses
@@ -163,7 +163,7 @@ export default function Dashboard({
         </>
       ) : (
         <h2 id="wd-dashboard-enrolled">
-          Enrolled Courses ({courses.length})
+          Enrolled Courses
           <hr />
         </h2>
       )}{" "}
@@ -171,7 +171,7 @@ export default function Dashboard({
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {currentUser.role === "FACULTY"
             ? // Show all courses with Delete and Edit options for faculty
-              courses.map((course) => (
+              courses.filter((course) => course && course._id).map((course) => (
                 <div
                   className="wd-dashboard-course col"
                   style={{ width: "300px" }}
@@ -252,7 +252,7 @@ export default function Dashboard({
             : // Non-faculty users: Respect the `showAll` state
             !enrolling
             ? // Enrolled courses only when showAll is false
-              courses.map((course) => (
+              courses.filter((course) => course && course._id).map((course) => (
                 <div
                   className="wd-dashboard-course col"
                   style={{ width: "300px" }}
@@ -294,7 +294,7 @@ export default function Dashboard({
                 </div>
               ))
             : // Show all courses when showAll is true
-              courses.map((course) => (
+              courses.filter((course) => course && course._id).map((course) => (
                 <div
                   className="wd-dashboard-course col"
                   style={{ width: "300px" }}
