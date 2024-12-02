@@ -86,7 +86,6 @@ export default function Dashboard({
     <div id="wd-dashboard" className="container-fluid">
       <h1 id="wd-dashboard-title">
         Dashboard{" "}
-        <pre>{JSON.stringify(currentUser._id)}</pre>
         <button
           onClick={() => setEnrolling(!enrolling)}
           className="float-end btn btn-primary"
