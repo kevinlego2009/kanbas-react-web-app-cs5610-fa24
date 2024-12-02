@@ -73,10 +73,12 @@ export default function Kanbas() {
   };
 
   useEffect(() => {
-    if (enrolling) {
-      fetchCourses();
-    } else {
-      findCoursesForUser();
+    if (currentUser && currentUser._id) {
+      if (enrolling) {
+        fetchCourses();
+      } else {
+        findCoursesForUser();
+      }
     }
   }, [currentUser, enrolling]);
 
