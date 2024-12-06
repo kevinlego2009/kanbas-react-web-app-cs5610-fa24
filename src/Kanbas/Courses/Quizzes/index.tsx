@@ -1,81 +1,51 @@
+import { format } from "path";
+import React, { useState } from "react";
 import { BsGripVertical } from "react-icons/bs";
-import AssignmentControls from "./AssignmentControls";
-import { RxTriangleDown } from "react-icons/rx";
-import AssignmentsControlButtons from "./AssignmentsControlButtons";
-import { MdOutlineAssignment } from "react-icons/md";
-import { IoEllipsisVertical } from "react-icons/io5";
 import { FaCheckCircle, FaCircle, FaTrash } from "react-icons/fa";
-import { useParams } from "react-router";
+import { IoEllipsisVertical } from "react-icons/io5";
+import { MdOutlineAssignment } from "react-icons/md";
+import { RxTriangleDown } from "react-icons/rx";
+import { assignments } from "../../Database";
+import AssignmentControls from "../Assignments/AssignmentControls";
+import AssignmentsControlButtons from "../Assignments/AssignmentsControlButtons";
 import { useDispatch, useSelector } from "react-redux";
-import { format } from "date-fns";
-import { deleteAssignment, setAssignments } from "./reducer";
-import { useEffect, useState } from "react";
-import * as coursesClient from "../client";
-import * as assignmentsClient from "./client";
+import { useParams } from "react-router";
+import QuizControls from "./QuizControls";
 
-export default function Assignments() {
+export default function Quizzes() {
   const { cid } = useParams();
-  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
-  const [assignmentToDelete, setAssignmentToDelete] = useState<string | null>(
-    null
-  );
-
-  const fetchAssignments = async () => {
-    const assignments = await coursesClient.findAssignmentsForCourse(
-      cid as string
-    );
-    dispatch(setAssignments(assignments));
-  };
-  useEffect(() => {
-    fetchAssignments();
-  }, []);
-
-  const handleDeleteClick = (id: string) => {
-    setAssignmentToDelete(id);
-  };
-
-  const confirmDelete = async (assignmentId: string) => {
-    if (assignmentToDelete) {
-      await assignmentsClient.deleteAssignment(assignmentId);
-      dispatch(deleteAssignment(assignmentToDelete));
-      setAssignmentToDelete(null);
-    }
-  };
-
-  const cancelDelete = () => {
-    setAssignmentToDelete(null);
-  };
 
   return (
-    <div id="wd-assignments" className="container-fluid">
-      <div>
-        <AssignmentControls currentUser={currentUser} />
-      </div>
-      <div className="mt-4">
-        <ul id="wd-assignments" className="list-group rounded-0">
-          <li className="wd-assignment-lists list-group-item p-0 mb-5 fs-5 border-light shadow-sm">
-            <div className="wd-title p-3 ps-2 bg-light d-flex align-items-center justify-content-between flex-wrap">
-              <div className="d-flex align-items-center flex-nowrap">
-                <div className="d-flex align-items-center me-2">
-                  <BsGripVertical className="fs-4 text-secondary" />
-                  <RxTriangleDown className="fs-3 ms-2" />
+    <div>
+      <div id="wd-quizzes" className="container-fluid">
+        <div>
+          <QuizControls currentUser={currentUser} />
+        </div>
+        <div className="mt-4">
+          <ul id="wd-quizzes" className="list-group rounded-0">
+            <li className="wd-quiz-lists list-group-item p-0 mb-5 fs-5 border-light shadow-sm">
+              <div className="wd-title p-3 ps-2 bg-light d-flex align-items-center justify-content-between flex-wrap">
+                <div className="d-flex align-items-center flex-nowrap">
+                  <div className="d-flex align-items-center me-2">
+                    <BsGripVertical className="fs-4 text-secondary" />
+                    <RxTriangleDown className="fs-3 ms-2" />
+                  </div>
+                  <b className="ms-2">ASSIGNMENT QUIZZES</b>
                 </div>
-                <b className="ms-2">ASSIGNMENTS</b>
-              </div>
-              <div className="d-flex align-items-center mt-2 mt-sm-0">
+                {/* <div className="d-flex align-items-center mt-2 mt-sm-0">
                 <span
                   className="border border-1 rounded-pill px-3 py-1 me-2"
-                  id="wd-assignments-title"
+                  id="wd-quizzes-title"
                 >
                   40% of Total
                 </span>
                 <AssignmentsControlButtons />
+              </div> */}
               </div>
-            </div>
 
-            <ul className="wd-assignment-list list-group list-group-flush">
+              {/* <ul className="wd-assignment-list list-group list-group-flush">
               {assignments.map((assign: any) => (
                 <li
                   key={assign._id}
@@ -141,9 +111,10 @@ export default function Assignments() {
                   </div>
                 </li>
               ))}
-            </ul>
-          </li>
-        </ul>
+            </ul> */}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
