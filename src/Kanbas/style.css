@@ -115,3 +115,13 @@ body * {
 .flex-grow-1 {
   padding-left: 6px;
 }
+
+#wd-quizzes {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#wd-quiz-controls {
+  padding-left: 20px;
+  padding-right: 20px;
+}

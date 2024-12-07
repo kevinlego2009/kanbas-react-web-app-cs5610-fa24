@@ -29,7 +29,11 @@ export default function QuizControls({
       </div>
       {currentUser.role === "FACULTY" ? (
         <div className="d-flex align-items-center">
-          <button id="wd-add-quiz" className="btn btn-lg btn-danger me-1">
+          <button
+            onClick={() => navigate(`./createQuiz`)}
+            id="wd-add-quiz"
+            className="btn btn-lg btn-danger me-1"
+          >
             <FaPlus
               className="position-relative me-2"
               style={{ bottom: "1px" }}

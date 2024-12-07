@@ -9,6 +9,7 @@ import PeopleTable from "./People/Table";
 import * as courseClient from "./client";
 import { useEffect, useState } from "react";
 import Quizzes from "./Quizzes";
+import QuizDetailEditor from "./Quizzes/QuizDetailEditor";
 
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
@@ -53,8 +54,9 @@ export default function Courses({ courses }: { courses: any[] }) {
             <Route path="/Assignments" element={<Assignments />} />
             <Route path="/Assignments/:aid" element={<AssignmentEditor />} />
             <Route path="/Quizzes" element={<Quizzes />} />
+            <Route path="/Quizzes/:qid" element={<QuizDetailEditor />} />
             <Route path="/Grades" element={<h2>Grades</h2>} />
-            <Route path="/People" element={<PeopleTable users={users}/>} />
+            <Route path="/People" element={<PeopleTable users={users} />} />
           </Routes>
         </div>
       </div>
