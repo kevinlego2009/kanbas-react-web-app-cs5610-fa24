@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,31 @@ export default function QuizDetailEditor() {
   const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const [tab, setTab] = useState("Details");
   const [showAddQuestion, setShowAddQuestion] = useState(false); // State to track if AddQuizQuestion should be displayed
+  const [quizExists, setQuizExists] = useState(false); // State to store the flag
+  const { qid } = useParams();
+
+  const checkQuizExist = async () => {
+    if (!qid) {
+      console.error("Invalid quiz ID provided");
+      return false; // Return false if qid is invalid
+    }
+    try {
+      const res = await coursesClient.findQuizById(qid);
+      return !!res; // Return true if the quiz exists, false otherwise
+    } catch (error) {
+      return false; // Return false on error
+    }
+  };
+
+  // useEffect to set the quizExists flag
+  useEffect(() => {
+    const fetchQuizExistence = async () => {
+      const exists = await checkQuizExist();
+      setQuizExists(exists); // Update the flag
+    };
+
+    fetchQuizExistence();
+  }, [qid]);
 
   const flag = quizzes.find((quiz: any) => quiz._id === qID) ? 1 : 0;
 
@@ -50,17 +75,17 @@ export default function QuizDetailEditor() {
     event.preventDefault();
     if (!cid) return;
 
-    const requiredFields = ["dueDate", "availableDate", "untilDate"];
+    // const requiredFields = ["dueDate", "availableDate", "untilDate"];
 
-    if (
-      Object.values(quiz).some(
-        (attribute: any) =>
-          attribute === "" && !requiredFields.includes(attribute)
-      )
-    ) {
-      alert("All date fields must be filled out.");
-      return;
-    }
+    // if (
+    //   Object.values(quiz).some(
+    //     (attribute: any) =>
+    //       attribute === "" && !requiredFields.includes(attribute)
+    //   )
+    // ) {
+    //   alert("All date fields must be filled out.");
+    //   return;
+    // }
 
     if (flag) {
       await quizzesClient.updateQuiz(quiz);
@@ -85,14 +110,16 @@ export default function QuizDetailEditor() {
           >
             Details
           </button>
-          <button
-            className="btn btn-outline-dark hover-red"
-            onClick={() => {
-              setTab("Questions");
-            }}
-          >
-            Questions
-          </button>
+          {quizExists && (
+            <button
+              className="btn btn-outline-dark hover-red"
+              onClick={() => {
+                setTab("Questions");
+              }}
+            >
+              Questions
+            </button>
+          )}
         </div>
 
         <style>
@@ -389,38 +416,77 @@ export default function QuizDetailEditor() {
             </div>{" "}
           </div>
         ) : (
+          // <div>
+          //   {!showAddQuestion ? (
+          //     // Display the button to add a new question
+          //     <div>
+          //       <div className="d-flex justify-content-center mb-3">
+          //         <button
+          //           className="btn btn-outline-dark hover-red"
+          //           onClick={() => setShowAddQuestion(true)} // Show AddQuizQuestion on click
+          //         >
+          //           + New Question
+          //         </button>
+          //       </div>
+          //       <hr />
+          //       <div className="d-flex justify-content-end">
+          //         <button className="btn btn-secondary me-2">Cancel</button>
+          //         <button className="btn btn-danger">Save</button>
+          //       </div>
+          //     </div>
+          //   ) : (
+          //     // Display the AddQuizQuestion component
+          //     <div>
+          //       <AddQuizQuestion />
+          //       <hr></hr>
+          //       <div className="d-flex justify-content-end mt-3">
+          //         <button
+          //           className="btn btn-secondary me-2"
+          //           onClick={() => setShowAddQuestion(false)} // Hide AddQuizQuestion on cancel
+          //         >
+          //           Cancel
+          //         </button>
+          //         <button className="btn btn-danger">Save</button>
+          //       </div>
+          //     </div>
+          //   )}
+          // </div>
           <div>
-            {!showAddQuestion ? (
-              // Display the button to add a new question
+            {quizExists && (
               <div>
-                <div className="d-flex justify-content-center mb-3">
-                  <button
-                    className="btn btn-outline-dark hover-red"
-                    onClick={() => setShowAddQuestion(true)} // Show AddQuizQuestion on click
-                  >
-                    + New Question
-                  </button>
-                </div>
-                <hr />
-                <div className="d-flex justify-content-end">
-                  <button className="btn btn-secondary me-2">Cancel</button>
-                  <button className="btn btn-danger">Save</button>
-                </div>
-              </div>
-            ) : (
-              // Display the AddQuizQuestion component
-              <div>
-                <AddQuizQuestion />
-                <hr></hr>
-                <div className="d-flex justify-content-end mt-3">
-                  <button
-                    className="btn btn-secondary me-2"
-                    onClick={() => setShowAddQuestion(false)} // Hide AddQuizQuestion on cancel
-                  >
-                    Cancel
-                  </button>
-                  <button className="btn btn-danger">Save</button>
-                </div>
+                {!showAddQuestion ? (
+                  // Display the button to add a new question
+                  <div>
+                    <div className="d-flex justify-content-center mb-3">
+                      <button
+                        className="btn btn-outline-dark hover-red"
+                        onClick={() => setShowAddQuestion(true)} // Show AddQuizQuestion on click
+                      >
+                        + New Question
+                      </button>
+                    </div>
+                    <hr />
+                    <div className="d-flex justify-content-end">
+                      <button className="btn btn-secondary me-2">Cancel</button>
+                      <button className="btn btn-danger">Save</button>
+                    </div>
+                  </div>
+                ) : (
+                  // Display the AddQuizQuestion component
+                  <div>
+                    <AddQuizQuestion />
+                    <hr></hr>
+                    <div className="d-flex justify-content-end mt-3">
+                      <button
+                        className="btn btn-secondary me-2"
+                        onClick={() => setShowAddQuestion(false)} // Hide AddQuizQuestion on cancel
+                      >
+                        Cancel
+                      </button>
+                      <button className="btn btn-danger">Save</button>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>

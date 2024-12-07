@@ -73,7 +73,17 @@ export const findQuizzesForCourse = async (courseId: string) => {
   return response.data;
 };
 
+export const findQuizById = async (quizId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${REMOTE_SERVER}/api/quizzes/${quizId}`
+  );
+  return response.data;
+};
+
 export const createQuizForCourse = async (quiz: any) => {
-  const response = await axiosWithCredentials.post(`${REMOTE_SERVER}/api/quizzes`, quiz);
+  const response = await axiosWithCredentials.post(
+    `${REMOTE_SERVER}/api/quizzes`,
+    quiz
+  );
   return response.data;
 };

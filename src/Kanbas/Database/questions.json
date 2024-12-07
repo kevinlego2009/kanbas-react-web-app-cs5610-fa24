@@ -1,0 +1,108 @@
+[
+  {
+    "_id": "64ff8b9eabc1234567891",
+    "quizId": "64ff8b9eabc1234567890",
+    "type": "Multiple Choice",
+    "title": "What is the primary purpose of rocket propulsion?",
+    "text": "Select the correct answer.",
+    "points": 10,
+    "choices": [
+      { "choiceText": "To generate thrust", "isCorrect": true },
+      { "choiceText": "To increase weight", "isCorrect": false },
+      { "choiceText": "To reduce drag", "isCorrect": false },
+      { "choiceText": "To stabilize flight", "isCorrect": false }
+    ],
+    "correctAnswers": [],
+    "trueFalseAnswer": null,
+    "createdAt": "2024-12-05T10:00:00.000Z",
+    "updatedAt": "2024-12-05T10:00:00.000Z"
+  },
+  {
+    "_id": "64ff8b9eabc1234567892",
+    "quizId": "64ff8b9eabc1234567890",
+    "type": "True/False",
+    "title": "Rocket propulsion works on Newton's Third Law of Motion.",
+    "text": "Determine whether this statement is true or false.",
+    "points": 5,
+    "choices": [],
+    "correctAnswers": [],
+    "trueFalseAnswer": true,
+    "createdAt": "2024-12-05T10:05:00.000Z",
+    "updatedAt": "2024-12-05T10:05:00.000Z"
+  },
+  {
+    "_id": "64ff8b9eabc1234567893",
+    "quizId": "64ff8b9eabc1234567890",
+    "type": "Fill in the Blank",
+    "title": "What is the exhaust velocity of a rocket engine?",
+    "text": "Provide the standard exhaust velocity in m/s.",
+    "points": 15,
+    "choices": [],
+    "correctAnswers": ["4500", "4500 m/s"],
+    "trueFalseAnswer": null,
+    "createdAt": "2024-12-05T10:10:00.000Z",
+    "updatedAt": "2024-12-05T10:10:00.000Z"
+  },
+  {
+    "_id": "64ff8b9eabc1234567894",
+    "quizId": "64ff8b9eabc1234567891",
+    "type": "Multiple Choice",
+    "title": "Which of the following is a common oxidizer in rocket fuel?",
+    "text": "Select the correct answer.",
+    "points": 20,
+    "choices": [
+      { "choiceText": "Liquid Oxygen (LOX)", "isCorrect": true },
+      { "choiceText": "Kerosene", "isCorrect": false },
+      { "choiceText": "Hydrazine", "isCorrect": false },
+      { "choiceText": "Methane", "isCorrect": false }
+    ],
+    "correctAnswers": [],
+    "trueFalseAnswer": null,
+    "createdAt": "2024-12-05T10:30:00.000Z",
+    "updatedAt": "2024-12-05T10:30:00.000Z"
+  },
+  {
+    "_id": "64ff8b9eabc1234567895",
+    "quizId": "64ff8b9eabc1234567891",
+    "type": "True/False",
+    "title": "Hydrogen is commonly used as a fuel in cryogenic engines.",
+    "text": "Determine whether this statement is true or false.",
+    "points": 10,
+    "choices": [],
+    "correctAnswers": [],
+    "trueFalseAnswer": true,
+    "createdAt": "2024-12-05T10:35:00.000Z",
+    "updatedAt": "2024-12-05T10:35:00.000Z"
+  },
+  {
+    "_id": "64ff8b9eabc1234567896",
+    "quizId": "64ff8b9eabc1234567892",
+    "type": "Multiple Choice",
+    "title": "What type of engine uses a solid fuel source?",
+    "text": "Select the correct answer.",
+    "points": 15,
+    "choices": [
+      { "choiceText": "Solid Rocket Engine", "isCorrect": true },
+      { "choiceText": "Liquid Rocket Engine", "isCorrect": false },
+      { "choiceText": "Hybrid Rocket Engine", "isCorrect": false },
+      { "choiceText": "Ion Engine", "isCorrect": false }
+    ],
+    "correctAnswers": [],
+    "trueFalseAnswer": null,
+    "createdAt": "2024-12-05T11:00:00.000Z",
+    "updatedAt": "2024-12-05T11:00:00.000Z"
+  },
+  {
+    "_id": "64ff8b9eabc1234567897",
+    "quizId": "64ff8b9eabc1234567892",
+    "type": "Fill in the Blank",
+    "title": "Which rocket engine is the most efficient in space?",
+    "text": "Provide the engine type.",
+    "points": 10,
+    "choices": [],
+    "correctAnswers": ["Ion Engine", "Ion Propulsion"],
+    "trueFalseAnswer": null,
+    "createdAt": "2024-12-05T11:05:00.000Z",
+    "updatedAt": "2024-12-05T11:05:00.000Z"
+  }
+]

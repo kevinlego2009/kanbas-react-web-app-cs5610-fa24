@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import * as courseClient from "../client";
+import { useParams } from "react-router";
 
 function QuestionForm() {
   const [activeTab, setActiveTab] = useState("multipleChoice");
   const [choices, setChoices] = useState([""]);
   const [trueFalseAnswer, setTrueFalseAnswer] = useState("true");
   const [wysiwygContent, setWysiwygContent] = useState("");
+
 
   const addChoice = () => {
     setChoices([...choices, ""]);
