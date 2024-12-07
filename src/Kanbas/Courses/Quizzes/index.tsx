@@ -39,8 +39,8 @@ export default function Quizzes() {
     };
   }, []);
 
-  const handleEdit = () => {
-    navigate("/quiz-details");
+  const handleEdit = (quizId: string) => {
+    navigate(`#/Kanbas/Courses/${cid}/Quizzes/${quizId}`);
   };
 
   const handleDelete = () => {
@@ -139,7 +139,7 @@ export default function Quizzes() {
                       <div className="flex-grow-1">
                         <a
                           className="wd-quiz-link text-dark"
-                          // href={`#/Kanbas/Courses/${cid}/Assignments/${assign._id}`}
+                          href={`#/Kanbas/Courses/${cid}/Quizzes/${quiz._id}`}
                         >
                           <b>{quiz.title}</b>
                         </a>
@@ -174,72 +174,82 @@ export default function Quizzes() {
                           )}
                         </div>
                       </div>
-                      <div className="d-flex align-items-center flex-nowrap">
-                        {quiz.isPublished ? (
-                          <div className="fs-4 me-2">✅</div>
-                        ) : (
-                          <div className="fs-4 me-2">🚫</div>
-                        )}
-                        <button
-                          className="btn btn-lg border p-2 bg-light d-flex justify-content-center align-items-center"
-                          style={{ width: "50px", height: "50px" }}
-                          onClick={(e) => {
-                            e.stopPropagation(); // Prevent triggering the document click listener
-                            toggleContextMenu(quiz._id);
-                          }}
-                        >
-                          <IoEllipsisVertical className="fs-4" />
-                        </button>
-                        {contextMenuQuiz === quiz._id && (
-                          <div
-                            className="context-menu position-absolute bg-white border rounded shadow-sm"
-                            style={{
-                              top: "60px",
-                              right: "0",
-                              minWidth: "200px",
-                              zIndex: 1000,
+                      {currentUser.role === "FACULTY" ? (
+                        <div className="d-flex align-items-center flex-nowrap">
+                          {quiz.isPublished ? (
+                            <div className="fs-4 me-2">✅</div>
+                          ) : (
+                            <div className="fs-4 me-2">🚫</div>
+                          )}
+                          <button
+                            className="btn btn-lg border p-2 bg-light d-flex justify-content-center align-items-center"
+                            style={{ width: "50px", height: "50px" }}
+                            onClick={(e) => {
+                              e.stopPropagation(); // Prevent triggering the document click listener
+                              toggleContextMenu(quiz._id);
                             }}
                           >
-                            <button
-                              className="btn btn-light w-100 text-start"
-                              onClick={handleEdit}
+                            <IoEllipsisVertical className="fs-4" />
+                          </button>
+                          {contextMenuQuiz === quiz._id && (
+                            <div
+                              className="context-menu position-absolute bg-white border rounded shadow-sm"
+                              style={{
+                                top: "60px",
+                                right: "0",
+                                minWidth: "200px",
+                                zIndex: 1000,
+                              }}
                             >
-                              Edit
-                            </button>
-                            <button
-                              className="btn btn-light w-100 text-start"
-                              onClick={() => handleDeleteClick(quiz._id)}
-                            >
-                              Delete
-                            </button>
-                            {quizToDelete === quiz._id && (
-                              <div className="confirm-dialog-overlay">
-                                <div className="confirm-dialog">
-                                  Are you sure you want to remove this quiz?
-                                  <button
-                                    onClick={() => confirmDelete(quiz._id)}
-                                    className="btn btn-danger me-2"
-                                  >
-                                    Yes
-                                  </button>
-                                  <button
-                                    onClick={cancelDelete}
-                                    className="btn btn-secondary"
-                                  >
-                                    No
-                                  </button>
+                              <button
+                                className="btn btn-light w-100 text-start"
+                                onClick={() => handleEdit(quiz._id)}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className="btn btn-light w-100 text-start"
+                                onClick={() => handleDeleteClick(quiz._id)}
+                              >
+                                Delete
+                              </button>
+                              {quizToDelete === quiz._id && (
+                                <div className="confirm-dialog-overlay">
+                                  <div className="confirm-dialog">
+                                    Are you sure you want to remove this quiz?
+                                    <button
+                                      onClick={() => confirmDelete(quiz._id)}
+                                      className="btn btn-danger me-2"
+                                    >
+                                      Yes
+                                    </button>
+                                    <button
+                                      onClick={cancelDelete}
+                                      className="btn btn-secondary"
+                                    >
+                                      No
+                                    </button>
+                                  </div>
                                 </div>
-                              </div>
-                            )}
-                            <button
-                              className="btn btn-light w-100 text-start"
-                              onClick={() => handlePublish(quiz)}
-                            >
-                              Publish/Unpublish
-                            </button>
-                          </div>
-                        )}
-                      </div>
+                              )}
+                              <button
+                                className="btn btn-light w-100 text-start"
+                                onClick={() => handlePublish(quiz)}
+                              >
+                                Publish/Unpublish
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="d-flex align-items-center flex-nowrap">
+                          {quiz.isPublished ? (
+                            <div className="fs-4 me-2">✅</div>
+                          ) : (
+                            <div className="fs-4 me-2">🚫</div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </li>
                 ))}
