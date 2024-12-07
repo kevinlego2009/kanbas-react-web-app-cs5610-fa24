@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as courseClient from "../client";
+import * as quizClient from "./client";
 import { useParams } from "react-router";
 
 function QuestionForm() {
@@ -8,7 +9,8 @@ function QuestionForm() {
   const [choices, setChoices] = useState([""]);
   const [trueFalseAnswer, setTrueFalseAnswer] = useState("true");
   const [wysiwygContent, setWysiwygContent] = useState("");
-
+  const [questions, setQuestions] = useState([]);
+  const { qid } = useParams();
 
   const addChoice = () => {
     setChoices([...choices, ""]);
@@ -219,13 +221,53 @@ function QuestionForm() {
 
 export default function AddQuizQuestion() {
   const [forms, setForms] = useState([<QuestionForm key={0} />]);
+  interface Question {
+    _id: string; // Example ID field
+    type: string; // Specify type as a string
+    title?: string; // Optional fields
+    choices?: string[];
+    correctChoice?: number;
+    content?: string;
+  }
+
+  const [questions, setQuestions] = useState<Question[]>([]); // Use the Question array type
+  const { qid } = useParams();
 
   const addNewForm = () => {
     setForms([...forms, <QuestionForm key={forms.length} />]);
   };
 
+  const fetchQuestionsForQuiz = async () => {
+    if (!qid) return;
+    try {
+      const questions = await quizClient.findQuestionsForQuiz(qid);
+      setQuestions(questions);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchQuestionsForQuiz();
+  }, [qid]);
+
   return (
     <div>
+      {/* Render existing questions */}
+      {questions.map((question, index) =>
+        question.type === "Multiple Choice" ? (
+          <div key={index}>
+            <div>Multiple Choice {question._id}</div>
+          </div>
+        ) : question.type === "True/False" ? (
+          <div key={index}>
+            <div>True/False {question._id}</div>
+          </div>
+        ) : question.type === "Fill in the Blank" ? (
+          <div key={index}>
+            <div>Fill in the Blank {question._id}</div>
+          </div>
+        ) : null
+      )}
+
       {forms}
       <div className="d-flex justify-content-end mt-4">
         <button className="btn btn-danger" onClick={addNewForm}>

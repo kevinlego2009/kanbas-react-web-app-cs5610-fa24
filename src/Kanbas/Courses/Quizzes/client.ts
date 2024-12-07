@@ -17,3 +17,10 @@ export const updateQuiz = async (quiz: any) => {
   );
   return data;
 };
+
+export const findQuestionsForQuiz = async (quizId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${QUIZZES_API}/${quizId}/questions`
+  );
+  return response.data;
+};
