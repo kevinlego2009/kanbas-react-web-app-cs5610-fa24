@@ -311,6 +311,90 @@ export default function QuizDetailEditor() {
                         Allow Multiple Attempts
                       </label>
                     </div>
+
+                    <div className="form-check mb-2">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="webcamRequired"
+                        checked={quiz.webcamRequired}
+                        onChange={() =>
+                          setQuiz((prev: any) => ({
+                            ...prev,
+                            webcamRequired: !prev.webcamRequired,
+                          }))
+                        }
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="webcamRequired"
+                      >
+                        Webcam required{" "}
+                      </label>
+                    </div>
+
+                    <div className="form-check mb-2">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="lockQuestionsAfterAnswering"
+                        checked={quiz.lockQuestionsAfterAnswering}
+                        onChange={() =>
+                          setQuiz((prev: any) => ({
+                            ...prev,
+                            lockQuestionsAfterAnswering:
+                              !prev.lockQuestionsAfterAnswering,
+                          }))
+                        }
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="lockQuestionsAfterAnswering"
+                      >
+                        Lock questions after answering{" "}
+                      </label>
+                    </div>
+
+                    <div className="form-check mb-2">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="oneQuestionAtATime"
+                        checked={quiz.oneQuestionAtATime}
+                        onChange={() =>
+                          setQuiz((prev: any) => ({
+                            ...prev,
+                            oneQuestionAtATime: !prev.oneQuestionAtATime,
+                          }))
+                        }
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="oneQuestionAtATime"
+                      >
+                        One question at a time{" "}
+                      </label>
+                    </div>
+
+                    <div className="form-check mb-2">
+                      <label
+                        className="form-check-label me-2"
+                        htmlFor="accessCode"
+                      >
+                        Access Code{" "}
+                      </label>
+                      <input
+                        type="text"
+                        id="accessCode"
+                        value={quiz.accessCode}
+                        onChange={(e) =>
+                          setQuiz((prev: any) => ({
+                            ...prev,
+                            accessCode: e.target.value,
+                          }))
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -332,7 +416,6 @@ export default function QuizDetailEditor() {
                       }
                       placeholder="Assign to"
                     />
-
                     <div className="row mt-3">
                       <div className="col">
                         <label htmlFor="wd-due-date" className="form-label">
@@ -342,11 +425,17 @@ export default function QuizDetailEditor() {
                           type="date"
                           id="wd-due-date"
                           className="form-control"
-                          value={quiz.dueDate}
+                          value={
+                            quiz.dueDate
+                              ? new Date(quiz.dueDate)
+                                  .toISOString()
+                                  .split("T")[0]
+                              : ""
+                          }
                           onChange={(e) =>
                             setQuiz((prev: any) => ({
                               ...prev,
-                              dueDate: e.target.value,
+                              dueDate: e.target.value, // Save as YYYY-MM-DD
                             }))
                           }
                         />
@@ -362,11 +451,17 @@ export default function QuizDetailEditor() {
                           type="date"
                           id="wd-available-from"
                           className="form-control"
-                          value={quiz.availableDate}
+                          value={
+                            quiz.availableDate
+                              ? new Date(quiz.availableDate)
+                                  .toISOString()
+                                  .split("T")[0]
+                              : ""
+                          }
                           onChange={(e) =>
                             setQuiz((prev: any) => ({
                               ...prev,
-                              availableDate: e.target.value,
+                              availableDate: e.target.value, // Save as YYYY-MM-DD
                             }))
                           }
                         />
@@ -382,11 +477,17 @@ export default function QuizDetailEditor() {
                           type="date"
                           id="wd-available-until"
                           className="form-control"
-                          value={quiz.untilDate}
+                          value={
+                            quiz.untilDate
+                              ? new Date(quiz.untilDate)
+                                  .toISOString()
+                                  .split("T")[0]
+                              : ""
+                          }
                           onChange={(e) =>
                             setQuiz((prev: any) => ({
                               ...prev,
-                              untilDate: e.target.value,
+                              untilDate: e.target.value, // Save as YYYY-MM-DD
                             }))
                           }
                         />
@@ -479,7 +580,11 @@ export default function QuizDetailEditor() {
                     <div className="d-flex justify-content-end mt-3">
                       <button
                         className="btn btn-secondary me-2"
-                        onClick={() => setShowAddQuestion(false)} // Hide AddQuizQuestion on cancel
+                        onClick={(e) => {
+                          setShowAddQuestion(false);
+                          e.preventDefault();
+                          navigate(-1);
+                        }} // Hide AddQuizQuestion on cancel
                       >
                         Cancel
                       </button>

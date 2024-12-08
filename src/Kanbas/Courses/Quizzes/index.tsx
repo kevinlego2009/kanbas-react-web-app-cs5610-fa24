@@ -40,7 +40,7 @@ export default function Quizzes() {
   }, []);
 
   const handleEdit = (quizId: string) => {
-    navigate(`#/Kanbas/Courses/${cid}/Quizzes/${quizId}`);
+    navigate(`/Kanbas/Courses/${cid}/Quizzes/${quizId}`);
   };
 
   const handleDelete = () => {
@@ -139,7 +139,7 @@ export default function Quizzes() {
                       <div className="flex-grow-1">
                         <a
                           className="wd-quiz-link text-dark"
-                          href={`#/Kanbas/Courses/${cid}/Quizzes/${quiz._id}`}
+                          href={`#/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/takeQuiz`}
                         >
                           <b>{quiz.title}</b>
                         </a>

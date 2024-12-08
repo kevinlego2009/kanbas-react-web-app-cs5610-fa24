@@ -24,3 +24,27 @@ export const findQuestionsForQuiz = async (quizId: string) => {
   );
   return response.data;
 };
+
+export const updateQuestionsForQuiz = async (question: any) => {
+  const response = await axiosWithCredentials.put(
+    `${REMOTE_SERVER}/api/questions/${question._id}`,
+    question
+  );
+  return response.data;
+};
+
+export const createQuestionForQuiz = async (question: any) => {
+  console.log("Question payload", question.data);
+  try {
+    const response = await axiosWithCredentials.post(
+      `${REMOTE_SERVER}/api/questions`,
+      question
+    );
+    console.log("Saved question:", response.data);
+
+    alert("Question added successfully!");
+  } catch (error) {
+    console.error("Error creating question:", error);
+    alert("An error occurred while creating the question. Please try again.");
+  }
+};
