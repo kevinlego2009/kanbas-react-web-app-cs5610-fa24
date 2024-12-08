@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import Quizzes from "./Quizzes";
 import QuizDetailEditor from "./Quizzes/QuizDetailEditor";
 import TakeQuiz from "./Quizzes/TakeQuiz";
+import TakingQuiz from "./Quizzes/TakingQuiz";
+import ReviewQuiz from "./Quizzes/ReviewQuiz";
 
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
@@ -57,6 +59,8 @@ export default function Courses({ courses }: { courses: any[] }) {
             <Route path="/Quizzes" element={<Quizzes />} />
             <Route path="/Quizzes/:qid" element={<QuizDetailEditor />} />
             <Route path="/Quizzes/:qid/takeQuiz" element={<TakeQuiz />} />
+            <Route path="/Quizzes/:qid/takingQuiz" element={<TakingQuiz />} />
+            <Route path="/Quizzes/:qid/reviewQuiz" element={<ReviewQuiz />} />
             <Route path="/Grades" element={<h2>Grades</h2>} />
             <Route path="/People" element={<PeopleTable users={users} />} />
           </Routes>

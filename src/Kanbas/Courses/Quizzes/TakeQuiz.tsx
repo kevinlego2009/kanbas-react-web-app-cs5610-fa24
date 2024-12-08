@@ -95,8 +95,15 @@ export default function TakeQuiz() {
               marginRight: "10px",
             }}
           >
-            Preview
+            <a
+              className="wd-quiz-link text-dark"
+              href={`#/Kanbas/Courses/${cid}/Quizzes/${qid}/takingQuiz`}
+              style={{ textDecoration: "none" }}
+            >
+              Preview{" "}
+            </a>
           </button>
+
           <button
             style={{
               backgroundColor: "#f1f1f1",
@@ -116,7 +123,15 @@ export default function TakeQuiz() {
         </div>
       ) : (
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
-          <button className="btn btn-danger">Take Quiz</button>
+          <button
+            className="btn btn-danger"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/takingQuiz`);
+            }}
+          >
+            Take Quiz
+          </button>
         </div>
       )}
       <hr />

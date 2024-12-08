@@ -20,6 +20,7 @@ export default function Quizzes() {
   const [contextMenuQuiz, setContextMenuQuiz] = useState<string | null>(null);
   const [quizToDelete, setQuizToDelete] = useState<string | null>(null);
   const navigate = useNavigate();
+  const [attempts, setAttempts] = useState([]);
 
   const toggleContextMenu = (quizId: string) => {
     setContextMenuQuiz((prev) => (prev === quizId ? null : quizId));
@@ -81,9 +82,27 @@ export default function Quizzes() {
     }
   };
 
+  const fetchAttempts = async () => {
+    if (!cid || !currentUser) {
+      console.log("No cid or currentUser");
+      return;
+    }
+
+    try {
+      const data = await quizzesClient.findAttemptsByQuizAndCourse(
+        currentUser._id,
+        cid
+      );
+      setAttempts(data);
+    } catch (error) {
+      console.error("Error fetching attempts:", error);
+    }
+  };
+
   useEffect(() => {
     fetchQuizzes();
-  }, []);
+    fetchAttempts();
+  }, [cid, currentUser]);
 
   const handleDeleteClick = (id: string) => {
     setQuizToDelete(id);
@@ -139,7 +158,29 @@ export default function Quizzes() {
                       <div className="flex-grow-1">
                         <a
                           className="wd-quiz-link text-dark"
-                          href={`#/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/takeQuiz`}
+                          href={
+                            currentUser.role === "FACULTY" ||
+                            (quiz.isPublished &&
+                              new Date() >= new Date(quiz.availableDate) &&
+                              new Date() <= new Date(quiz.untilDate))
+                              ? `#/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/takeQuiz`
+                              : undefined
+                          }
+                          onClick={(e) => {
+                            if (
+                              currentUser.role !== "FACULTY" &&
+                              (!quiz.isPublished ||
+                                new Date() < new Date(quiz.availableDate) ||
+                                new Date() > new Date(quiz.untilDate))
+                            ) {
+                              e.preventDefault();
+                              alert(
+                                quiz.isPublished
+                                  ? "This quiz is not available at this time."
+                                  : "This quiz is not published yet."
+                              );
+                            }
+                          }}
                         >
                           <b>{quiz.title}</b>
                         </a>
@@ -165,13 +206,7 @@ export default function Quizzes() {
                           <b>Due</b> {format(new Date(quiz.dueDate), "MMM d")}{" "}
                           at 11:59pm | {quiz.points} pts |{" "}
                           {quiz.questions?.length || 0} Questions
-                          {currentUser.role === "STUDENT" && (
-                            <>
-                              {" | "}
-                              <b>Score:</b>{" "}
-                              {quiz.lastAttempt?.score ?? "No attempts yet"}
-                            </>
-                          )}
+                          {currentUser.role === "STUDENT" && ""}
                         </div>
                       </div>
                       {currentUser.role === "FACULTY" ? (
@@ -250,6 +285,56 @@ export default function Quizzes() {
                           )}
                         </div>
                       )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div className="mt-4">
+          <ul id="wd-quizzes" className="list-group rounded-0">
+            <li className="wd-quiz-lists list-group-item p-0 mb-5 fs-5 border-light shadow-sm">
+              <div className="wd-title p-3 ps-2 bg-light d-flex align-items-center justify-content-between flex-wrap">
+                <div className="d-flex align-items-center flex-nowrap">
+                  <div className="d-flex align-items-center me-2">
+                    <BsGripVertical className="fs-4 text-secondary" />
+                    <RxTriangleDown className="fs-3 ms-2" />
+                  </div>
+                  <b className="ms-2">Attempted Quizzes</b>
+                </div>
+              </div>
+
+              <ul
+                className="wd-quiz-list list-group list-group-flush"
+                style={{ borderLeft: "6px solid rgb(34, 151, 34)" }}
+              >
+                {attempts.map((attempt: any) => (
+                  <li
+                    key={attempt._id}
+                    className="wd-quiz-list-item list-group-item p-4 border-bottom"
+                  >
+                    <div className="d-flex align-items-center">
+                      <div className="d-flex align-items-center flex-nowrap me-3">
+                        <IoRocketOutline
+                          className="fs-3 ms-2"
+                          style={{ color: "green" }}
+                        />
+                      </div>
+                      <div className="flex-grow-1">
+                        <a
+                          className="wd-quiz-link text-dark"
+                          href={`#/Kanbas/Courses/${cid}/Quizzes/${attempt.quizId}/reviewQuiz`}
+                        >
+                          <b>{attempt.quizTitle || "Quiz Title"}</b>
+                        </a>
+                        <div className="text-muted mt-1">
+                          <b>Score:</b> {attempt.score} | <b>Attempt:</b>{" "}
+                          {attempt.attemptNumber} | <b>Submitted At:</b>{" "}
+                          {format(new Date(attempt.submittedAt), "MMM d, yyyy")}
+                        </div>
+                      </div>
                     </div>
                   </li>
                 ))}
